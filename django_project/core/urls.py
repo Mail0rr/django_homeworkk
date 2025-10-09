@@ -21,7 +21,6 @@ from django.contrib import admin
 from django.urls import include, path
 from products.views import IndexPageView
 
-
 urlpatterns = [
     path("", IndexPageView.as_view(), name="index_page"),
     path("admin/", admin.site.urls),
