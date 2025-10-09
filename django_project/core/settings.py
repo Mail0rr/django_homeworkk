@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-!xq!q1a5q(&0)q=&gqhb4^0$rx&0ipn+f%akm5bod$^q78+58$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# імена хостів/доменів, які може обслуговувати Django.
+# використовується для уникнення атак з підміною хосту в заголовку 'Host'
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # реєстрація додатку (без цього міграції не спрацюють для вашого додатку)
+    # назва може бути просто 'products'
     "products.apps.ProductsConfig",
 ]
 
@@ -55,7 +59,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -116,11 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
-
+# шлях до статичних файлів. Працює тільки для режиму розробки DEBUG=True
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
