@@ -5,13 +5,19 @@ from . import views
 urlpatterns = [
     # /products
     # path("", views.product_list, name="product_list"),
-    path("products/", views.ProductListView.as_view(), name="product_list"),
-    path("products/<int:product_pk>/<slug:product_slug>/", views.ProductDetailView.as_view(), name="product_detail"),
-    path("brands/", views.BrandListView.as_view(), name="brand_list"),
-    path("brands/<int:pk>/", views.BrandDetailView.as_view(), name="brand_detail"),
+    path("", views.ProductListView.as_view(), name="product_list"),
     # path(
+    #     # /products/5/samsung/
     #     "<int:product_pk>/<slug:product_slug>/",
-    #     views.ProductDetailView.as_view(),
+    #     views.product_detail,
+    #     # name бажано завжди писати, щоб потім його використовували
+    #     # в функції 'reverse'
     #     name="product_detail",
     # ),
+    path(
+        "<int:product_pk>/<slug:product_slug>/",
+        views.ProductDetailView.as_view(),
+        name="product_detail",
+    ),
+    path('', views.students_list, name='students_list'),
 ]

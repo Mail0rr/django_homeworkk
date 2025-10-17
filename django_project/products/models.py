@@ -28,8 +28,19 @@ class Product(models.Model):
             kwargs={"product_pk": self.pk, "product_slug": self.slug},
         )
 
-class Brand(models.Model):
-    name = models.CharField(max_length=50)
-    country = models.CharField(max_length=50)
-    description = models.TextField(max_length=200)
-    image = models.ImageField(null=True, blank=True)
+class School(models.Model):
+    school_number = models.IntegerField()
+    school_address = models.CharField(max_length=255)
+
+class Class(models.Model):
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    class_name = models.CharField(max_length=50)
+    room_number = models.IntegerField()
+
+class Student(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    address = models.CharField(max_length=255)
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    class_group = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True)
+

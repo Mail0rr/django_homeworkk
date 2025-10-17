@@ -24,5 +24,6 @@ from products.views import IndexPageView
 urlpatterns = [
     path("", IndexPageView.as_view(), name="index_page"),
     path("admin/", admin.site.urls),
-    path("", include("products.urls")),
+    path("products/", include("products.urls")),
+    # потрібно для роботи зі статичними файлами в режимі розробки DEBUG=True
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

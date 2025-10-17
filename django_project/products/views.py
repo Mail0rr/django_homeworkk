@@ -7,7 +7,7 @@ from django.http.response import (
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView, TemplateView
 
-from .models import Product, Brand
+from .models import Product, Student
 
 
 def product_list(request: HttpRequest) -> HttpResponse:
@@ -33,6 +33,9 @@ def product_detail(
         context={"product": product},
     )
 
+def students_list(request):
+    students = Student.objects.select_related('school', 'class_group').all()
+    return render(request, 'students_list.html', {'students': students})
 
 class IndexPageView(TemplateView):
     template_name = "index_page.html"
@@ -51,16 +54,3 @@ class ProductDetailView(DetailView):
     pk_url_kwarg = "product_pk"
     slug_url_kwarg = "product_slug"
     context_object_name = "product"
-
-
-
-class BrandListView(ListView):
-    model = Brand
-    template_name = "products/brand_list.html"
-    context_object_name = "brands"
-
-
-class BrandDetailView(DetailView):
-    model = Brand
-    template_name = "products/brand_detail.html"
-    context_object_name = "brand"
